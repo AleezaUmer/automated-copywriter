@@ -56,7 +56,7 @@ automated-copywriter/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/automated-copywriter.git
+git clone https://github.com/AleezaUmer/automated-copywriter.git
 ```
 
 ### 2. Navigate to the project folder
