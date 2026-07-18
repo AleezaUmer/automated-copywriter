@@ -1,3 +1,5 @@
 streamlit
 groq
 python-dotenv
+fpdf
+streamlit-copy-to-clipboard
