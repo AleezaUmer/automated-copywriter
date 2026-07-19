@@ -367,44 +367,35 @@ Instructions:
 
 
     pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Arial", size=12)
 
-    pdf.add_page()
+pdf.multi_cell(
+    0,
+    10,
+    output.encode("latin-1", "ignore").decode("latin-1")
+)
 
-    pdf.set_font(
-        "Arial",
-        size=12
-    )
+# Save PDF to a temporary file
+pdf_file = "marketing_copy.pdf"
+pdf.output(pdf_file)
 
+# Read PDF as bytes
+with open(pdf_file, "rb") as file:
+    pdf_bytes = file.read()
 
-    pdf.multi_cell(
-        0,
-        10,
-        output.encode(
-            "latin-1",
-            "ignore"
-        ).decode(
-            "latin-1"
-        )
-    )
+st.download_button(
+    "📥 Download TXT",
+    data=output,
+    file_name="marketing_copy.txt",
+    mime="text/plain",
+    use_container_width=True
+)
 
-
-    pdf_output = pdf.output(dest="S")
-
-
-
-    st.download_button(
-        "📥 Download TXT",
-        output,
-        "marketing_copy.txt",
-        "text/plain",
-        use_container_width=True
-    )
-
-
-    st.download_button(
-        "📄 Download PDF",
-        pdf_output,
-        "marketing_copy.pdf",
-        "application/pdf",
-        use_container_width=True
-    )
+st.download_button(
+    "📄 Download PDF",
+    data=pdf_bytes,
+    file_name="marketing_copy.pdf",
+    mime="application/pdf",
+    use_container_width=True
+)
