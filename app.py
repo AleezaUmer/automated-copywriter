@@ -18,24 +18,39 @@ if theme:
     st.markdown("""
     <style>
 
-    .stApp {
-        background-color: #121212;
-        color: #FFFFFF;
+    /* Dark Theme */
+
+    .stApp{
+        background:#121212;
+        color:white;
     }
 
-    h1,h2,h3,h4,h5,h6,p,label,span,div {
-        color: #FFFFFF !important;
+    h1,h2,h3,h4,h5,h6,p,label,span,div{
+        color:white !important;
     }
 
     .stTextInput input,
-    .stTextArea textarea {
-        background-color: #1E1E1E !important;
-        color: white !important;
-        border: 1px solid #555 !important;
+    .stTextArea textarea{
+        background:#1E1E1E !important;
+        color:white !important;
+        border:1px solid #555 !important;
     }
 
     section[data-testid="stSidebar"]{
-        background-color:#1A1A1A;
+        background:#1A1A1A;
+    }
+
+    .stButton > button,
+    .stDownloadButton > button{
+        background:#2563EB !important;
+        color:white !important;
+        border:none !important;
+    }
+
+    .stButton > button:hover,
+    .stDownloadButton > button:hover{
+        background:#1D4ED8 !important;
+        color:white !important;
     }
 
     </style>
@@ -45,24 +60,39 @@ else:
     st.markdown("""
     <style>
 
-    .stApp {
-        background-color: #F8F9FA;
-        color: #212529;
+    /* Light Theme */
+
+    .stApp{
+        background:#F8F9FA;
+        color:#212529;
     }
 
-    h1,h2,h3,h4,h5,h6,p,label,span,div {
-        color: #212529 !important;
+    h1,h2,h3,h4,h5,h6,p,label,span,div{
+        color:#212529 !important;
     }
 
     .stTextInput input,
-    .stTextArea textarea {
-        background-color: white !important;
-        color: #212529 !important;
-        border: 1px solid #CED4DA !important;
+    .stTextArea textarea{
+        background:white !important;
+        color:#212529 !important;
+        border:1px solid #CED4DA !important;
     }
 
     section[data-testid="stSidebar"]{
-        background-color:#F1F3F5;
+        background:#F1F3F5;
+    }
+
+    .stButton > button,
+    .stDownloadButton > button{
+        background:#0D6EFD !important;
+        color:white !important;
+        border:none !important;
+    }
+
+    .stButton > button:hover,
+    .stDownloadButton > button:hover{
+        background:#0B5ED7 !important;
+        color:white !important;
     }
 
     </style>
@@ -199,7 +229,7 @@ with st.sidebar:
 # Buttons
 # =====================================
 
-col1,col2 = st.columns(2)
+col1, col2 = st.columns(2)
 
 
 with col1:
@@ -237,7 +267,7 @@ if generate or regenerate:
 
 
 
-    prompt=f"""
+    prompt = f"""
 
 You are an expert marketing copywriter.
 
@@ -317,11 +347,12 @@ Instructions:
         "✅ Marketing copy generated successfully!"
     )
 
-    st.subheader(
-    f"{platform} Marketing Copy"
-)
+    st.subheader(f"{platform} Marketing Copy")
+
     st.write(output)
+
     copy_text = output.replace("\\", "\\\\").replace("`", "\\`").replace("$", "\\$")
+    
     components.html(
         f"""
         <button
@@ -364,38 +395,37 @@ Instructions:
     # =============================
 
     st.divider()
-
-
+    
     pdf = FPDF()
-pdf.add_page()
-pdf.set_font("Arial", size=12)
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
 
-pdf.multi_cell(
-    0,
-    10,
-    output.encode("latin-1", "ignore").decode("latin-1")
-)
+    pdf.multi_cell(
+        0,
+        10,
+        output.encode("latin-1", "ignore").decode("latin-1")
+        )
+    
+    pdf_file = "marketing_copy.pdf"
+    pdf.output(pdf_file)
+    
+    with open(pdf_file, "rb") as file:
+        pdf_bytes = file.read()
 
-# Save PDF to a temporary file
-pdf_file = "marketing_copy.pdf"
-pdf.output(pdf_file)
+    os.remove(pdf_file)
 
-# Read PDF as bytes
-with open(pdf_file, "rb") as file:
-    pdf_bytes = file.read()
-
-st.download_button(
-    "📥 Download TXT",
-    data=output,
-    file_name="marketing_copy.txt",
-    mime="text/plain",
-    use_container_width=True
-)
-
-st.download_button(
-    "📄 Download PDF",
-    data=pdf_bytes,
-    file_name="marketing_copy.pdf",
-    mime="application/pdf",
-    use_container_width=True
-)
+    st.download_button(
+        "📥 Download TXT",
+        data=output,
+        file_name="marketing_copy.txt",
+        mime="text/plain",
+        use_container_width=True
+        )
+    
+    st.download_button(
+        "📄 Download PDF",
+        data=pdf_bytes,
+        file_name="marketing_copy.pdf",
+        mime="application/pdf",
+        use_container_width=True
+        )
