@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import os
 from fpdf import FPDF
 
-
 st.set_page_config(
     page_title="AI Copywriter Pro",
     page_icon="✍️",
