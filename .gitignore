@@ -1,14 +1,5 @@
-# Environment variables
-.env
-
-# Virtual Environment
-venv/
-
-# Python cache
+marketing_copy.pdf
 __pycache__/
-
-# Compiled Python files
 *.pyc
-
-# Streamlit cache
-.streamlit/
+.env
+venv/
