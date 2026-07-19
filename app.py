@@ -1,9 +1,10 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from groq import Groq
 from dotenv import load_dotenv
 import os
 from fpdf import FPDF
-from streamlit_copy_to_clipboard import st_copy_to_clipboard
+
 
 st.set_page_config(
     page_title="AI Copywriter Pro",
@@ -293,14 +294,26 @@ Instructions:
     st.subheader(
     f"{platform} Marketing Copy"
 )
-    
     st.write(output)
-
-    # 📋 Copy to Clipboard Button
-    st_copy_to_clipboard(
-        output,
-        "📋 Copy Response"
-        )
+    copy_text = output.replace("\\", "\\\\").replace("`", "\\`").replace("$", "\\$")
+    components.html(
+        f"""
+        <button
+        onclick="navigator.clipboard.writeText(`{copy_text}`)"
+        style="
+            background-color:#4CAF50;
+            color:white;
+            border:none;
+            padding:10px 18px;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        ">
+        📋 Copy Response
+    </button>
+    """,
+    height=60,
+)
 
     # =============================
     # Statistics
