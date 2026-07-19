@@ -17,28 +17,54 @@ theme = st.toggle("🌙 Dark Mode")
 if theme:
     st.markdown("""
     <style>
+
     .stApp {
-        background-color: #0e1117;
-        color: white;
+        background-color: #121212;
+        color: #FFFFFF;
     }
 
-    .stMarkdown, .stText, p, h1, h2, h3, h4, h5, h6, label {
-        color: white !important;
+    h1,h2,h3,h4,h5,h6,p,label,span,div {
+        color: #FFFFFF !important;
     }
+
+    .stTextInput input,
+    .stTextArea textarea {
+        background-color: #1E1E1E !important;
+        color: white !important;
+        border: 1px solid #555 !important;
+    }
+
+    section[data-testid="stSidebar"]{
+        background-color:#1A1A1A;
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
 else:
     st.markdown("""
     <style>
+
     .stApp {
-        background-color: white;
-        color: black;
+        background-color: #F8F9FA;
+        color: #212529;
     }
 
-    .stMarkdown, .stText, p, h1, h2, h3, h4, h5, h6, label {
-        color: black !important;
+    h1,h2,h3,h4,h5,h6,p,label,span,div {
+        color: #212529 !important;
     }
+
+    .stTextInput input,
+    .stTextArea textarea {
+        background-color: white !important;
+        color: #212529 !important;
+        border: 1px solid #CED4DA !important;
+    }
+
+    section[data-testid="stSidebar"]{
+        background-color:#F1F3F5;
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
