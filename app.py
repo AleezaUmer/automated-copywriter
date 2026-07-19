@@ -388,9 +388,7 @@ Instructions:
     )
 
 
-    pdf_output = pdf.output(
-        dest="S"
-    ).encode("latin-1")
+    pdf_output = pdf.output(dest="S")
 
 
 
