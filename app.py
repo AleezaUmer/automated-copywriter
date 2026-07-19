@@ -12,34 +12,35 @@ st.set_page_config(
 )
 
 
-theme = st.toggle(
-    "🌙 Dark Mode"
-)
+theme = st.toggle("🌙 Dark Mode")
 
 if theme:
-    st.markdown(
-        """
-        <style>
-        .stApp {
-            background-color: #0e1117;
-            color: white;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <style>
+    .stApp {
+        background-color: #0e1117;
+        color: white;
+    }
+
+    .stMarkdown, .stText, p, h1, h2, h3, h4, h5, h6, label {
+        color: white !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 else:
-    st.markdown(
-        """
-        <style>
-        .stApp {
-            background-color: white;
-            color: black;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("""
+    <style>
+    .stApp {
+        background-color: white;
+        color: black;
+    }
+
+    .stMarkdown, .stText, p, h1, h2, h3, h4, h5, h6, label {
+        color: black !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # =====================================
 # Page Configuration
